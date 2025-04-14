@@ -17,7 +17,7 @@ runs:
   - name: Publish Oomol Package
     run: |
       mkdir -p /tmp/ooomol
-      oopm install --token "github-action-${{ steps.id_token.outputs.id_token }}" -d /tmp/ooomol
+      oopm install --token "github-action-${{ steps.id_token.outputs.id_token }}" -d /tmp/ooomol --registry "http://registry.oomol.dev"
       oopm thumbnail -s /tmp/ooomol
-      oopm publish --token "github-action-${{ steps.id_token.outputs.id_token }}"
+      oopm publish --token "github-action-${{ steps.id_token.outputs.id_token }}" --registry "http://registry.oomol.dev"
     shell: bash
