@@ -8,7 +8,7 @@ runs:
     shell: bash
   - name: Get Id Token
     uses: actions/github-script@v7
-    id: idtoken
+    id: id_token
     with:
       script: |
         const coredemo = require('@actions/core')
@@ -16,5 +16,8 @@ runs:
         coredemo.setOutput('id_token', id_token)
   - name: Publish Oomol Package
     run: |
-      oopm publish --token ${{ steps.idtoken.outputs.id_token }}
+      mkdir -p /tmp/ooomol
+      oopm install --token "github-action-${{ steps.id_token.outputs.id_token }}" -d /tmp/ooomol
+      oopm thumbnail -s /tmp/ooomol
+      oopm publish --token "github-action-${{ steps.id_token.outputs.id_token }}"
     shell: bash
