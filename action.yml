@@ -1,5 +1,9 @@
 name: 'publish oomol package'
 description: 'Publish oomol package by github action workflow'
+inputs:
+  registry:
+    description: 'oopnm registry url'
+    required: false
 runs:
   using: "composite"
   steps:
@@ -17,7 +21,12 @@ runs:
   - name: Publish Oomol Package
     run: |
       mkdir -p /tmp/ooomol
-      oopm install --token "github-action-${{ steps.id_token.outputs.id_token }}" -d /tmp/ooomol --registry "http://registry.oomol.dev"
+      if [ -n "${{ inputs.registry }}" ]; then
+        REGISTRY_ARG="--registry ${{ inputs.registry }}"
+      else
+        REGISTRY_ARG=""
+      fi
+      oopm install --token "github-action-${{ steps.id_token.outputs.id_token }}" -d /tmp/ooomol $REGISTRY_ARG
       oopm thumbnail -s /tmp/ooomol
-      oopm publish --token "github-action-${{ steps.id_token.outputs.id_token }}" --registry "http://registry.oomol.dev"
+      oopm publish --token "github-action-${{ steps.id_token.outputs.id_token }}" $REGISTRY_ARG
     shell: bash
