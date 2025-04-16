@@ -34,6 +34,5 @@ jobs:
       - name: Install oopm
         run: npm install -g oopm
       - name: Publish OOMOL Package
-        uses: oomol-lab/oopm-publish-action
-
+        uses: oomol-lab/oopm-publish-action@main
 ```
