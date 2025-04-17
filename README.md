@@ -14,7 +14,7 @@ permissions:
 ## Example
 
 ```yaml
-name: Publish OOMOL Package
+name: Publish Package
 on:
   push:
     branches:
@@ -24,15 +24,15 @@ permissions:
   id-token: write
 
 jobs:
-  on: ubuntu-latest
+  publish:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-      - name: Install oopm
-        run: npm install -g oopm
-      - name: Publish OOMOL Package
-        uses: oomol-lab/oopm-publish-action@main
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+    - name: Install oopm
+      run: npm install -g oopm
+    - name: Publish OOMOL Package
+      uses: oomol-lab/oopm-publish-action@main
 ```
