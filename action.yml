@@ -26,7 +26,7 @@ runs:
       else
         REGISTRY_ARG=""
       fi
-      oopm install --token "github-action-${{ steps.id_token.outputs.id_token }}" -d /tmp/ooomol -r $REGISTRY_ARG
+      oopm install --token "github-action-${{ steps.id_token.outputs.id_token }}" -d /tmp/ooomol $REGISTRY_ARG
       oopm thumbnail -s /tmp/ooomol
-      oopm publish --token "github-action-${{ steps.id_token.outputs.id_token }}" -r $REGISTRY_ARG
+      oopm publish --token "github-action-${{ steps.id_token.outputs.id_token }}" $REGISTRY_ARG
     shell: bash
